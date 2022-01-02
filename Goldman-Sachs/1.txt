@@ -1,0 +1,16 @@
+vector<vector<string> > Anagrams(vector<string>& vec) {
+       unordered_map<string , vector<string>> hmap;
+        vector<vector<string>> ans;
+        int i = 0;
+        for(auto it : vec){
+            sort(it.begin(),it.end());
+            hmap[it].push_back(vec[i++]);
+        }
+        
+        for(auto it : hmap){
+           ans.push_back(it.second);
+        }
+        
+      
+        return ans;
+    }

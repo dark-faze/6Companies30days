@@ -1,0 +1,15 @@
+ int countSubArrayProductLessThanK(const vector<int>& nums, int n, long long k) {
+        if (k == 0) return 0;
+        int low = 0;
+        int high = 0;
+        int count = 0;  
+        long long curr = 1;
+        for(high ; high < n ; high++){
+           curr *= nums[high];
+            while(low <= high && curr >= k){
+                 curr /= nums[low++];
+            }
+            count += high - low + 1;
+        }            
+        return count;
+    }

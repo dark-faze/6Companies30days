@@ -1,0 +1,14 @@
+ull getNthUglyNo(int n) {
+	   set<long long int> st;
+	   st.insert(1);
+	   n--;
+	   while(n--){
+	       auto it = st.begin();
+	       long long int x = *it;
+	       st.erase(it);
+	       st.insert(x*2);
+	       st.insert(x*3);
+	       st.insert(x*4);
+	   }
+	   return *st.begin();
+	}

@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int minSubArrayLen(int target, vector<int>& nums) {
+        int minsize = INT_MAX;
+        int low = 0, high = 0;
+        int currsum = 0;
+        while(high < nums.size()){
+           if(currsum+nums[high] < target){
+               currsum += nums[high];
+               high++;
+           }
+            else if(currsum+nums[high] >= target){
+                if(high-low+1 < minsize) minsize = high-low+1 ;
+                currsum -= nums[low];
+                low++;
+            }
+        }
+        if(minsize == INT_MAX) return 0;
+        return minsize;
+    }
+};

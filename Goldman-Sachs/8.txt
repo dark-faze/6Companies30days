@@ -1,0 +1,22 @@
+class Solution {
+	public:
+	 int help(string &s , int i , int dp[]){ 
+        // Top to Bottom
+        if(i >= s.size()) return 1;
+        if(dp[i] != -1) return dp[i];
+        int ans = 0;
+        int op1 = s[i]-'0', op2 = 0;
+        if(i<s.size()-1) op2 = 10*op1 + s[i+1]-'0';
+        if(op1>0) ans+=help(s,i+1,dp);
+        if(op1>0&&op2>0&&op2<=26) ans+=help(s,i+2,dp);
+        
+        return dp[i] = ans%1000000007;
+    }
+  
+		int CountWays(string s){
+		int dp[s.size()];
+        memset(dp , -1 , sizeof dp);
+        return help(s,0,dp);
+		}
+
+};

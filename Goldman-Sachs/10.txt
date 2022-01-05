@@ -1,0 +1,2 @@
+Using priority queue (max heap).
+Time complexity can be n*log(k) if we pop the top whenever we find a number greater than it.

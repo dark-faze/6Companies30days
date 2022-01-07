@@ -1,0 +1,50 @@
+ bool goodRow (int k , vector<vector<int>>& mat ){
+        vector<int> vec(10,0);
+        for(int i = 0 ; i < 9 ; i++){
+            vec[mat[k][i]]++;
+        }
+        for(int i = 1 ; i <= 9 ; i++){
+             if(vec[i] > 1) return false;
+        }
+         return true;
+    }
+    bool goodCol (int k , vector<vector<int>>& mat ){
+        vector<int> vec(10,0);
+        for(int i = 0 ; i < 9 ; i++){
+            vec[mat[i][k]]++;
+        }
+         for(int i = 1 ; i <= 9 ; i++){
+             if(vec[i] > 1) return false;
+        }
+         return true;
+    }
+    bool goodBox (int m , int n , vector<vector<int>>& mat ){
+        vector<int> vec(10,0);
+        for(int i = m ; i < m+3 ; i++){
+            for(int j = n ; j < n+3 ; j++){
+                vec[mat[i][j]]++;
+            }
+        }
+        for(int i = 1 ; i <= 9 ; i++){
+            if(vec[i] > 1) return false;
+        }
+        return true;
+    }
+    int isValid(vector<vector<int>> &mat){
+        int flag = 1;
+        for(int i = 0 ; i < 9 ; i++){
+            if(!goodRow(i,mat) || !goodCol(i,mat)) {
+                flag = 0;
+                break;
+            }
+        }
+        
+        for(int i = 0 ; i < 9 ; i+=3){
+            for(int j = 0 ; j < 9 ; j+=3){
+                if(!goodBox(i , j , mat)) flag = 0;
+            }
+        }
+        
+    return (flag==1)?1:0;  
+        
+    }

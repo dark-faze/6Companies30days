@@ -1,0 +1,38 @@
+ void power(Node *root , vector<int>& ans){
+         if(!root){
+            ans.push_back(-1);
+            return;
+        }
+        ans.push_back(root->data);
+        
+        power(root->left,ans);
+        
+        power(root->right,ans);
+        
+    }
+    vector<int> serialize(Node *root) 
+    {
+         vector<int> ans;
+         power(root , ans);
+         return ans;
+       
+    }
+    
+    //Function to deserialize a list and construct the tree.
+    Node* builder(vector<int> &A , int& ind){
+        if(ind >= A.size() or A.size() == 0)
+            return NULL;
+        if(A[ind] == -1)
+            return NULL;
+        Node *temp = new Node(A[ind]);
+        ind++;
+        temp->left = builder(A,ind);
+        ind++;
+        temp->right = builder(A,ind);
+        return temp;
+    }
+    Node * deSerialize(vector<int> &a)
+    {
+       int ind = 0;
+       return builder(a,ind);
+    }

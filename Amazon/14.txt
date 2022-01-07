@@ -1,0 +1,52 @@
+ int minTime(Node* root, int target) 
+    {
+        int ans = 0;
+        Node* targetNode = NULL;
+        unordered_map<Node*,Node*> mp;
+        queue<Node*> q;
+        q.push(root);
+        while(!q.empty()){
+            Node* temp = q.front();
+            if(temp->data == target) targetNode = temp;
+            q.pop();
+            if(temp->left) {
+                q.push(temp->left);
+                mp[temp->left] = temp;
+            }
+            if(temp->right) {
+                q.push(temp->right);
+                mp[temp->right] = temp;
+            }
+        }
+        
+        unordered_map<Node*,int> vis;
+        vis[targetNode] = 1;
+        q.push(targetNode);
+        while(!q.empty()){
+        int sz = q.size();
+        int count = 0;
+        for(int i = 0;i<sz;i++) {
+            Node* temp = q.front();
+            q.pop();
+            
+            if(mp[temp] && !vis[mp[temp]]){
+               vis[mp[temp]]++;
+               q.push(mp[temp]);
+               count++;
+            }
+            if(temp->left && !vis[temp->left]){
+               vis[temp->left]++;
+                q.push(temp->left);
+               count++;
+            }
+            if(temp->right && !vis[temp->right]){
+               vis[temp->right]++;
+               q.push(temp->right);
+               count++;
+            }
+            
+        }
+             if(count > 0) ans++;
+        }
+       return ans;
+    }
